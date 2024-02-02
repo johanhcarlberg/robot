@@ -1,4 +1,5 @@
 *** Settings ***
+Suite Setup    Open Browser To 'Automationplayground.com' Start Page
 Documentation    test for automationplayground.com    # info text
 Library    SeleniumLibrary    # Which Library is being used
 
@@ -28,7 +29,7 @@ Scenario: Login 'Automationplayground.com'
     [Documentation]    User attempts to login 'Automationplayground.com'
     [Tags]    Login
     Set Selenium Speed    0.5    # Browser speed; lower = faster, higher = slower
-    Given User Is On Login Page
+    Given User enter the login page
     When User Inputs Their Credentials
     Then User Should Be Logged In And See The 'Our Happy Customers' Page
 
@@ -40,9 +41,13 @@ Scenario: Create new customer
     Then A new customer should be created
 
 *** Keywords ***
-User is on login page
-    Open browser    browser=Chrome
-    Go To    https://automationplayground.com/crm/login.html
+# Setup
+Open Browser To 'Automationplayground.com' Start Page
+    Open Browser    https://automationplayground.com/crm/index.html    Chrome
+
+# Chapter 1 - User Login
+User enter the login page
+    Click Link    //a[@id='SignIn']
 
 User inputs their credentials
     Input Text    //input[@id='email-id']    ${userEmail}
@@ -53,6 +58,7 @@ User should be logged in and see the 'Our Happy Customers' page
     Wait Until Page Contains Element    //h2[normalize-space()='Our Happy Customers']
     Wait Until Page Contains Element    //a[@id='new-customer']
 
+# Chapter 2 - User Adds New Customer With Information
 User has clicked new customer
     Click Link    ${newCustomerButton}
     Wait Until Page Contains Element    //h2[text()="Add Customer"]
