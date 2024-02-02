@@ -6,6 +6,20 @@ Library    SeleniumLibrary    # Which Library is being used
 ${userEmail}    JohnDoe@hotmail.com    # Dummy email
 ${userPass}    162534    # Dummy password
 
+${emailInput}    //*[@id="EmailAddress"]
+${firstNameInput}    //*[@id="FirstName"]
+${lastNameInput}    //*[@id="LastName"]
+${cityInput}    //*[@id="City"]
+${stateInput}    //*[@id="StateOrRegion"]
+${maleGenderRadioButton}    //input[@type="radio" and @name="gender" and @value="male"]
+${addToPromotionalListChecbox}    //input[@type="checkbox" and @name="promos-name"]
+${submitButton}    //button[@type="submit" and text()="Submit"]
+
+${firstName}    Test
+${lastName}    Testsson
+${city}    Detroit
+${state}    Michigan
+
 *** Test Cases ***
 Scenario: Login 'Automationplayground.com'
     [Documentation]    User attempts to login 'Automationplayground.com'
